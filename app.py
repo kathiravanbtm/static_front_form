@@ -46,7 +46,7 @@ def process_form_data(form):
             })
             i += 1
         
-        context["total_credits"] = sum(item["credits"] for item in context["category_table"]) 
+        context["structure_total_credits"] = sum(item["credits"] for item in context["category_table"]) 
         context["regulation"] = clean_text(form.get("reg", ""))
         context["dept"] = clean_text(form.get(f"dept", ""))
         # Process Category Table (Structure of Program)
@@ -114,7 +114,6 @@ def index():
     if request.method == "POST":
         try:
             form_data = process_form_data(request.form)
-            print(form_data)
             doc_io = generate_docx(form_data)
 
             return send_file(
